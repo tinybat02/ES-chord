@@ -37693,6 +37693,15 @@ var processData = function processData(data) {
     };
   }
 
+  var columnStoresLength = Object.keys(data[0]).length - 5;
+
+  if (data.length !== columnStoresLength) {
+    return {
+      matrix: null,
+      keys: null
+    };
+  }
+
   var storesList = data.map(function (elm) {
     return elm.Source;
   });

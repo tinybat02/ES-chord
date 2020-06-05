@@ -4,6 +4,12 @@ export const processData = (data: SingleElement[]) => {
     return { matrix: null, keys: null };
   }
 
+  const columnStoresLength = Object.keys(data[0]).length - 5;
+
+  if (data.length !== columnStoresLength) {
+    return { matrix: null, keys: null };
+  }
+
   const storesList = data.map(elm => elm.Source);
 
   const indexStore: { [key: string]: number } = {};
