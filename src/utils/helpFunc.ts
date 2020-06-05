@@ -26,6 +26,5 @@ export const processData = (data: SingleElement[]) => {
     });
   });
 
-  console.log('matrix ', matrix);
   return { matrix, keys: storesList };
 };

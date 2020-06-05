@@ -37725,7 +37725,6 @@ var processData = function processData(data) {
       }
     });
   });
-  console.log('matrix ', matrix);
   return {
     matrix: matrix,
     keys: storesList
