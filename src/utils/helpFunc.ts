@@ -4,13 +4,12 @@ export const processData = (data: SingleElement[]) => {
     return { matrix: null, keys: null };
   }
 
-  const columnStoresLength = Object.keys(data[0]).length - 5;
+  const storesList = [...new Set(data.map(elm => elm.Source))];
 
-  if (data.length !== columnStoresLength) {
+  const columnStoresLength = Object.keys(data[0]).length - 5;
+  if (storesList.length !== columnStoresLength) {
     return { matrix: null, keys: null };
   }
-
-  const storesList = data.map(elm => elm.Source);
 
   const indexStore: { [key: string]: number } = {};
   storesList.map(store => (indexStore[store] = storesList.indexOf(store)));
@@ -27,5 +26,6 @@ export const processData = (data: SingleElement[]) => {
     });
   });
 
+  console.log('matrix ', matrix);
   return { matrix, keys: storesList };
 };

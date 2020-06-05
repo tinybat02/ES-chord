@@ -37693,18 +37693,19 @@ var processData = function processData(data) {
     };
   }
 
+  var storesList = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(new Set(data.map(function (elm) {
+    return elm.Source;
+  })));
+
   var columnStoresLength = Object.keys(data[0]).length - 5;
 
-  if (data.length !== columnStoresLength) {
+  if (storesList.length !== columnStoresLength) {
     return {
       matrix: null,
       keys: null
     };
   }
 
-  var storesList = data.map(function (elm) {
-    return elm.Source;
-  });
   var indexStore = {};
   storesList.map(function (store) {
     return indexStore[store] = storesList.indexOf(store);
@@ -37724,6 +37725,7 @@ var processData = function processData(data) {
       }
     });
   });
+  console.log('matrix ', matrix);
   return {
     matrix: matrix,
     keys: storesList
