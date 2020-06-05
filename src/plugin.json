@@ -1,0 +1,21 @@
+{
+  "type": "panel",
+  "name": "ES Chord Diagram",
+  "id": "id-grafana-es-chord-diagram",
+  "dataFormats": ["table"],
+  "info": {
+    "description": "ES Chord Diagram",
+    "author": {
+      "name": "Nam Le"
+    },
+    "keywords": [],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "6.3.x",
+    "plugins": []
+  }
+}
