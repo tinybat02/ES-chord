@@ -1,6 +1,13 @@
 import { SingleElement } from '../types';
 export const processData = (data: SingleElement[]) => {
-  const storesList = data.map(elm => elm.Source);
+  if (data.length == 0) {
+    return { matrix: null, keys: null };
+  }
+
+  const stores1 = data.map(elm => elm.Source);
+  const stores2 = Object.keys(data[0]).filter(elm => !['_id', '_type', '_index', 'timestamp', 'Source'].includes(elm));
+  const storesList = [...new Set([...stores1, ...stores2])];
+
   const indexStore: { [key: string]: number } = {};
   storesList.map(store => (indexStore[store] = storesList.indexOf(store)));
 

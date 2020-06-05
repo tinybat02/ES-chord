@@ -37661,9 +37661,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
 
 var processData = function processData(data) {
-  var storesList = data.map(function (elm) {
+  if (data.length == 0) {
+    return {
+      matrix: null,
+      keys: null
+    };
+  }
+
+  var stores1 = data.map(function (elm) {
     return elm.Source;
   });
+  var stores2 = Object.keys(data[0]).filter(function (elm) {
+    return !['_id', '_type', '_index', 'timestamp', 'Source'].includes(elm);
+  });
+
+  var storesList = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(new Set(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(stores1, stores2)));
+
   var indexStore = {};
   storesList.map(function (store) {
     return indexStore[store] = storesList.indexOf(store);
