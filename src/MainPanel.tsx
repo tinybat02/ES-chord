@@ -46,10 +46,25 @@ export class MainPanel extends PureComponent<Props> {
   };
 
   componentDidMount() {
-    const { buffer } = this.props.data.series[0].fields[0].values as Buffer;
-    const { matrix, keys } = processData(buffer);
-    this.setState({ matrix, keys });
+    if (this.props.data.series.length > 0) {
+      const { buffer } = this.props.data.series[0].fields[0].values as Buffer;
+      const { matrix, keys } = processData(buffer);
+      this.setState({ matrix, keys });
+    }
   }
+
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.data.series !== this.props.data.series) {
+      if (this.props.data.series.length == 0) {
+        this.setState({ matrix: null, keys: null });
+        return;
+      }
+      const { buffer } = this.props.data.series[0].fields[0].values as Buffer;
+      const { matrix, keys } = processData(buffer);
+      this.setState({ matrix, keys });
+    }
+  }
+
   render() {
     const { width, height } = this.props;
     const { matrix, keys } = this.state;

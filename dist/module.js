@@ -37505,16 +37505,41 @@ function (_super) {
   }
 
   MainPanel.prototype.componentDidMount = function () {
-    var buffer = this.props.data.series[0].fields[0].values.buffer;
+    if (this.props.data.series.length > 0) {
+      var buffer = this.props.data.series[0].fields[0].values.buffer;
 
-    var _a = Object(_utils_helpFunc__WEBPACK_IMPORTED_MODULE_4__["processData"])(buffer),
-        matrix = _a.matrix,
-        keys = _a.keys;
+      var _a = Object(_utils_helpFunc__WEBPACK_IMPORTED_MODULE_4__["processData"])(buffer),
+          matrix = _a.matrix,
+          keys = _a.keys;
 
-    this.setState({
-      matrix: matrix,
-      keys: keys
-    });
+      this.setState({
+        matrix: matrix,
+        keys: keys
+      });
+    }
+  };
+
+  MainPanel.prototype.componentDidUpdate = function (prevProps) {
+    if (prevProps.data.series !== this.props.data.series) {
+      if (this.props.data.series.length == 0) {
+        this.setState({
+          matrix: null,
+          keys: null
+        });
+        return;
+      }
+
+      var buffer = this.props.data.series[0].fields[0].values.buffer;
+
+      var _a = Object(_utils_helpFunc__WEBPACK_IMPORTED_MODULE_4__["processData"])(buffer),
+          matrix = _a.matrix,
+          keys = _a.keys;
+
+      this.setState({
+        matrix: matrix,
+        keys: keys
+      });
+    }
   };
 
   MainPanel.prototype.render = function () {
@@ -37668,15 +37693,9 @@ var processData = function processData(data) {
     };
   }
 
-  var stores1 = data.map(function (elm) {
+  var storesList = data.map(function (elm) {
     return elm.Source;
   });
-  var stores2 = Object.keys(data[0]).filter(function (elm) {
-    return !['_id', '_type', '_index', 'timestamp', 'Source'].includes(elm);
-  });
-
-  var storesList = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(new Set(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(stores1, stores2)));
-
   var indexStore = {};
   storesList.map(function (store) {
     return indexStore[store] = storesList.indexOf(store);
