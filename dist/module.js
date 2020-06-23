@@ -37686,6 +37686,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
 
 var processData = function processData(data) {
+  console.log('data ', data);
+
   if (data.length == 0) {
     return {
       matrix: null,
@@ -37700,6 +37702,7 @@ var processData = function processData(data) {
   var columnStoresLength = Object.keys(data[0]).length - 5;
 
   if (storesList.length !== columnStoresLength) {
+    console.log('stop ', columnStoresLength);
     return {
       matrix: null,
       keys: null
@@ -37725,6 +37728,8 @@ var processData = function processData(data) {
       }
     });
   });
+  console.log('matrix ', matrix);
+  console.log('keys ', storesList);
   return {
     matrix: matrix,
     keys: storesList

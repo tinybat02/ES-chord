@@ -1,5 +1,7 @@
 import { SingleElement } from '../types';
 export const processData = (data: SingleElement[]) => {
+  console.log('data ', data);
+
   if (data.length == 0) {
     return { matrix: null, keys: null };
   }
@@ -8,6 +10,7 @@ export const processData = (data: SingleElement[]) => {
 
   const columnStoresLength = Object.keys(data[0]).length - 5;
   if (storesList.length !== columnStoresLength) {
+    console.log('stop ', columnStoresLength);
     return { matrix: null, keys: null };
   }
 
@@ -26,5 +29,7 @@ export const processData = (data: SingleElement[]) => {
     });
   });
 
+  console.log('matrix ', matrix);
+  console.log('keys ', storesList);
   return { matrix, keys: storesList };
 };
